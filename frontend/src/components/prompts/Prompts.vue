@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import Backup from "./Backup"
 import Help from "./Help";
 import Info from "./Info";
 import Delete from "./Delete";
@@ -26,6 +27,7 @@ import buttons from "@/utils/buttons";
 export default {
   name: "prompts",
   components: {
+    Backup,
     Info,
     Delete,
     Rename,
@@ -86,6 +88,7 @@ export default {
     currentComponent: function () {
       const matched =
         [
+          "backup",
           "info",
           "help",
           "delete",

@@ -10,6 +10,12 @@ filebrowser.exe
 .DS_Store
 node_modules
 
+# frontend/dist
+frontend/dist/*
+
+# test files
+test
+
 # local env files
 .env.local
 .env.*.local

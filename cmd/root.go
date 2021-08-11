@@ -8,7 +8,7 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"os"
+	os "os"
 	"os/signal"
 	"path/filepath"
 	"strings"
@@ -316,7 +316,9 @@ func quickSetup(flags *pflag.FlagSet, d pythonData) {
 		Signup:        false,
 		CreateUserDir: false,
 		Defaults: settings.UserDefaults{
-			Scope:       ".",
+			//Scope:       ".",
+			// for dev test
+			Scope:       "./test",
 			Locale:      "en",
 			SingleClick: false,
 			Perm: users.Permissions{
@@ -390,6 +392,9 @@ func initConfig() {
 		v.AddConfigPath(".")
 		v.AddConfigPath(home)
 		v.AddConfigPath("/etc/filebrowser/")
+		//path, _ := os.Getwd()
+		//fmt.Println(path)
+		//v.AddConfigPath(path)
 		v.SetConfigName(".filebrowser")
 	} else {
 		v.SetConfigFile(cfgFile)

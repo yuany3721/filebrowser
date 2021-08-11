@@ -71,6 +71,13 @@
           :label="$t('buttons.upload')"
           @action="upload"
         />
+        <action
+          v-if="headerButtons.backup"
+          icon="backup"
+          id="backup-button"
+          :label="$t('buttons.backup')"
+          @action="backup"
+        />
         <action icon="info" :label="$t('buttons.info')" show="info" />
         <action
           icon="check_circle"
@@ -358,6 +365,7 @@ export default {
     },
     headerButtons() {
       return {
+        backup: this.user.perm.create && this.user.perm.download && this.user.perm.delete,
         upload: this.user.perm.create,
         download: this.user.perm.download,
         shell: this.user.perm.execute && enableExec,
@@ -826,6 +834,16 @@ export default {
         typeof DataTransferItem.prototype.webkitGetAsEntry !== "undefined"
       ) {
         this.$store.commit("showHover", "upload");
+      } else {
+        document.getElementById("upload-input").click();
+      }
+    },
+    backup: function () {
+      if (
+        typeof window.DataTransferItem !== "undefined" &&
+        typeof DataTransferItem.prototype.webkitGetAsEntry !== "undefined"
+      ) {
+        this.$store.commit("showHover", "backup");
       } else {
         document.getElementById("upload-input").click();
       }
