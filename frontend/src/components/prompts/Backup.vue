@@ -1,22 +1,22 @@
 <template>
-<!-- 未加入i18n -->
+<!-- TODO not included in i18n -->
   <div class="card floating">
     <div class="card-title">
-      <h2>备份</h2>
+      <h2>点击上传需要备份的内容</h2>
     </div>
 
     <div class="card-content">
-      <p>请选择备份内容</p>
+      <p>注意：<br>备份中如果存在同名文件，新文件将直接覆盖旧文件</p>
     </div>
 
     <div class="card-action full">
-      <div @click="uploadFile" class="action">
+      <div @click="backupFile" class="action">
         <i class="material-icons">insert_drive_file</i>
-        <div class="title">File</div>
+        <div class="title">文件</div>
       </div>
-      <div @click="uploadFolder" class="action">
+      <div @click="backupFolder" class="action">
         <i class="material-icons">folder</i>
-        <div class="title">Folder</div>
+        <div class="title">文件夹</div>
       </div>
     </div>
   </div>
@@ -26,13 +26,13 @@
 export default {
   name: "backup",
   methods: {
-    uploadFile: function () {
-      document.getElementById("upload-input").value = "";
-      document.getElementById("upload-input").click();
+    backupFile: function () {
+      document.getElementById("backup-input").value = "";
+      document.getElementById("backup-input").click();
     },
-    uploadFolder: function () {
-      document.getElementById("upload-folder-input").value = "";
-      document.getElementById("upload-folder-input").click();
+    backupFolder: function () {
+      document.getElementById("backup-folder-input").value = "";
+      document.getElementById("backup-folder-input").click();
     },
   },
 };

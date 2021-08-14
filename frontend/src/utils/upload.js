@@ -125,3 +125,49 @@ export function handleFiles(files, base, overwrite = false) {
     store.dispatch("upload/upload", item);
   }
 }
+
+export function backupFiles(files) {
+  for (let i = 0; i < files.length; i++) {
+    let id = store.state.upload.id;
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let dateStr =
+      year + (month < 10 ? "0" + month : month) + (day < 10 ? "0" + day : day);
+    let path = "/files/" + dateStr + "bak/";
+    let file = files[i];
+
+    // TODO not included in i18n
+    if (file.type.indexOf("video") != -1) {
+      path += "video/";
+    } else if (file.type.indexOf("image") != -1) {
+      path += "img/";
+    } else if (file.type.indexOf("text/plain") != -1) {
+      path += "txt/";
+    } else if (file.type.indexOf("application/pdf") != -1) {
+      path += "pdf/";
+    } else if (file.type.indexOf("application/vnd.ms-powerpoint") != -1) {
+      path += "ppt/";
+    } else if (file.type.indexOf("application/msword") != -1) {
+      path += "word/";
+    } else if (
+      file.type.indexOf("application/vnd.ms-excel") != -1 ||
+      file.type.indexOf(
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      ) != -1
+    ) {
+      path += "excel/";
+    }
+
+    path += url.encodeRFC5987ValueChars(file.name);
+    const item = {
+      id,
+      path,
+      file,
+      overwrite: true,
+    };
+
+    store.dispatch("upload/upload", item);
+  }
+}

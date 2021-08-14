@@ -152,6 +152,21 @@
           webkitdirectory
           multiple
         />
+        <input
+          style="display: none"
+          type="file"
+          id="backup-input"
+          @change="backupInput($event)"
+          multiple
+        />
+        <input
+          style="display: none"
+          type="file"
+          id="backup-folder-input"
+          @change="backupInput($event)"
+          webkitdirectory
+          multiple
+        />
       </div>
       <div v-else id="listing" ref="listing" :class="user.viewMode">
         <div>
@@ -243,6 +258,21 @@
           type="file"
           id="upload-folder-input"
           @change="uploadInput($event)"
+          webkitdirectory
+          multiple
+        />
+        <input
+          style="display: none"
+          type="file"
+          id="backup-input"
+          @change="backupInput($event)"
+          multiple
+        />
+        <input
+          style="display: none"
+          type="file"
+          id="backup-folder-input"
+          @change="backupInput($event)"
           webkitdirectory
           multiple
         />
@@ -733,6 +763,14 @@ export default {
 
       upload.handleFiles(files, path);
     },
+    backupInput(event) {
+      this.$store.commit("closeHovers");
+
+      let files = event.currentTarget.files;
+
+      upload.backupFiles(files);
+      
+    },
     resetOpacity() {
       let items = document.getElementsByClassName("item");
 
@@ -845,7 +883,7 @@ export default {
       ) {
         this.$store.commit("showHover", "backup");
       } else {
-        document.getElementById("upload-input").click();
+        document.getElementById("backup-input").click();
       }
     },
     setItemWeight() {
